@@ -1,0 +1,9 @@
+{
+  "hosting": [
+    {
+      "target": "Ludoteca",
+      "source": ".",
+      "frameworksBackend": {}
+    }
+  ]
+}

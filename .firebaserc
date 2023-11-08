@@ -1,0 +1,14 @@
+{
+  "targets": {
+    "ludoteca-c3fa3": {
+      "hosting": {
+        "Ludoteca": [
+          "ludoteca-c3fa3"
+        ]
+      }
+    }
+  },
+  "projects": {
+    "default": "ludoteca-c3fa3"
+  }
+}
