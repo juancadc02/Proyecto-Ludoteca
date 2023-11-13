@@ -1,4 +1,6 @@
 import { Component } from '@angular/core';
+import { Juegos } from 'src/app/Modelos/juegos';
+import { JuegosService } from 'src/app/Servicios/juegos.service';
 
 @Component({
   selector: 'app-lista-juego',
@@ -7,4 +9,12 @@ import { Component } from '@angular/core';
 })
 export class ListaJuegoComponent {
 
+  constructor(private servicioJuegos: JuegosService){}
+
+
+  juegos :Juegos[]=[];
+  
+  ngOnInit(){
+    this.servicioJuegos.listarJuego().subscribe(res=> this.juegos = res)
+  }
 }

@@ -1,1 +1,7 @@
-<p>lista-juego works!</p>
+<ul class="list-group" *ngIf="juegos">
+
+    <li class="list-group-item" *ngFor="let juego of juegos">
+      {{juego.idJuego}} {{juego.nombreJuego}}  {{juego.precioJuego}}  <span ><i class="bi bi-pencil-square bg bg-warning" routerLink='/juegos/{{juego.idJuego}}'></i></span>
+    </li>
+
+</ul>

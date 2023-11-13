@@ -1,1 +1,27 @@
-<p>detalle-juego works!</p>
+<div class="container mt-4">
+    <h2>Agregar Juego</h2>
+    <form [formGroup]="juegoForm" (ngSubmit)="agregarJuego()">
+        <div class="mb-3">
+          <label for="idJuego" class="form-label">ID del Juego:</label>
+          <input type="text" class="form-control" id="idJuego" formControlName="idJuego" required>
+        </div>
+      
+        <div class="mb-3">
+          <label for="nombreJuego" class="form-label">Nombre del Juego:</label>
+          <input type="text" class="form-control" id="nombreJuego" formControlName="nombreJuego" required>
+        </div>
+      
+        <div class="mb-3">
+          <label for="codigoReferenciaJuego" class="form-label">Código de Referencia del Juego:</label>
+          <input type="text" class="form-control" id="codigoReferenciaJuego" formControlName="codigoReferenciaJuego" required>
+        </div>
+      
+        <div class="mb-3">
+          <label for="precioJuego" class="form-label">Precio del Juego:</label>
+          <input type="number" class="form-control" id="precioJuego" formControlName="precioJuego" required>
+        </div>
+      
+        <button type="submit" class="btn btn-primary">Agregar Juego</button>
+      </form>
+  </div>
+  
