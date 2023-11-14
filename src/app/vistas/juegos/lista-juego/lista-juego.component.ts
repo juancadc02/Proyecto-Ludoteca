@@ -17,4 +17,7 @@ export class ListaJuegoComponent {
   ngOnInit(){
     this.servicioJuegos.listarJuego().subscribe(res=> this.juegos = res)
   }
+  
+  
+  
 }

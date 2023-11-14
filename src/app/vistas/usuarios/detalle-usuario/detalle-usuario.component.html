@@ -1,0 +1,22 @@
+<div class="container mt-4">
+    <h2>Agregar Usuario</h2>
+    <form [formGroup]="usuarioForm" (ngSubmit)="agregarUsuario()">
+        <div class="mb-3">
+          <label for="nombreUsuario" class="form-label">Nombre Usuario</label>
+          <input type="text" class="form-control" id="nombreUsuario" formControlName="nombreUsuario" required>
+        </div>
+      
+        <div class="mb-3">
+          <label for="contraseñaUsuario" class="form-label">Contraseña Usuario</label>
+          <input type="text" class="form-control" id="contraseñaUsuario" formControlName="contraseñaUsuario" required>
+        </div>
+      
+        <div class="mb-3">
+          <label for="correoUsuario" class="form-label">Correo Usuario:</label>
+          <input type="text" class="form-control" id="correoUsuario" formControlName="correoUsuario" required>
+        </div>
+      
+        <button type="submit" class="btn btn-primary">Agregar Usuario</button>
+      </form>
+  </div>
+  

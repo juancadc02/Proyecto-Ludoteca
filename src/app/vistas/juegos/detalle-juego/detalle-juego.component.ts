@@ -11,7 +11,7 @@ import { JuegosService } from 'src/app/Servicios/juegos.service';
 export class DetalleJuegoComponent {
 
   juegoForm: FormGroup;
-
+  
   constructor(private fb: FormBuilder, private servicioJuegos: JuegosService) {
     this.juegoForm = this.fb.group({
       idJuego: ['', Validators.required],
@@ -20,7 +20,6 @@ export class DetalleJuegoComponent {
       precioJuego: ['', Validators.required],
     });
   }
-
 
   agregarJuego() {
     if (this.juegoForm.valid) {
@@ -36,5 +35,6 @@ export class DetalleJuegoComponent {
     }
   
   }
+
 }
 
