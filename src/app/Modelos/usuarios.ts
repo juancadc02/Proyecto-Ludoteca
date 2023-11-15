@@ -1,6 +1,7 @@
 export interface Usuario {
 
+    id?:string,
     nombreUsuario:string,
-    contraseñaUsuario:string,
+    contrasenaUsuario:string,
     correoUsuario:string
 }

@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Firestore, addDoc, collection, collectionData,doc } from '@angular/fire/firestore';
+import { Firestore, addDoc, collection, collectionData,doc, setDoc } from '@angular/fire/firestore';
 import { Juegos } from '../Modelos/juegos';
 import { Observable } from 'rxjs';
 
@@ -10,8 +10,7 @@ import { Observable } from 'rxjs';
 export class JuegosService {
 
   constructor(private db: Firestore) { }
-
- 
+  private juegosCollection = 'juegos';
 
   agregarJuego(juego: Juegos) {
     const juegoReferencia = collection(this.db,`juegos`);
@@ -22,5 +21,10 @@ export class JuegosService {
     const juegosRef =collection(this.db,'juegos')
     return collectionData(juegosRef,{idField:'id'}) as Observable<Juegos[]>
   }
+  modificarJuego(objeto: any, nombreColeccion: string, id: string) {
+    const collectionRef = doc(this.db, nombreColeccion+"/"+id);
+    return setDoc(collectionRef, objeto);
+  }
+ 
 
 }

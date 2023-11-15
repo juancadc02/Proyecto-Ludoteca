@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
-import { Firestore, addDoc, collection } from '@angular/fire/firestore';
+import { Firestore, addDoc, collection, collectionData } from '@angular/fire/firestore';
 import { Usuario } from '../Modelos/usuarios';
+import { Observable } from 'rxjs';
 
 
 @Injectable({
@@ -16,6 +17,10 @@ export class UsuariosService {
     return addDoc(usuarioReferencia,usuario);
   }
 
+  listarUsuario() : Observable <Usuario[]>{
+    const juegosRef =collection(this.db,'usuarios')
+    return collectionData(juegosRef,{idField:'id'}) as Observable<Usuario[]>
+  }
 
   
 }

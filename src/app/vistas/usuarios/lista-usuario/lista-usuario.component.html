@@ -1,1 +1,9 @@
-<p>lista-usuario works!</p>
+<ul class="list-group" *ngIf="usuarios">
+
+    <li class="list-group-item" *ngFor="let usu of usuarios">
+      {{usu.nombreUsuario}} 
+      {{usu.contrasenaUsuario}} 
+      {{usu.correoUsuario}}  <span ><i class="bi bi-pencil-square bg bg-warning" routerLink='usuarios/{{usu.id}}'></i></span>
+    </li>
+
+</ul>

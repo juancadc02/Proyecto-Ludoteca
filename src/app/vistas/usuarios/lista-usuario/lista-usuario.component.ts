@@ -1,4 +1,6 @@
 import { Component } from '@angular/core';
+import { Usuario } from 'src/app/Modelos/usuarios';
+import { UsuariosService } from 'src/app/Servicios/usuarios.service';
 
 @Component({
   selector: 'app-lista-usuario',
@@ -7,4 +9,12 @@ import { Component } from '@angular/core';
 })
 export class ListaUsuarioComponent {
 
+  constructor(private servicioUsuarios: UsuariosService){}
+
+
+  usuarios :Usuario[]=[];
+  
+  ngOnInit(){
+    this.servicioUsuarios.listarUsuario().subscribe(res=> this.usuarios = res)
+  }
 }
