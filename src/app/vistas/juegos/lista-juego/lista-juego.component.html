@@ -1,37 +1,38 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Document</title>
 </head>
-<body >
-  <ul class="list-group" *ngIf="juegos">
 
+<body>
 
-    <li class="list-group-item" *ngFor="let juego of juegos">
-      {{juego.idJuego}} {{juego.nombreJuego}}  {{juego.precioJuego}}  <span ><i class="bi bi-pencil-square bg bg-warning" routerLink='/juegos/{{juego.id}}'></i></span>
-    </li>
+  <table class="table">
+    <thead>
+      <tr>
+        <th scope="col">Id</th>
+        <th scope="col">Nombre Juego</th>
+        <th scope="col">Precio Juego</th>
+        <th scope="col">Acciones</th>
 
-</ul>
-
-<table class="table">
-  <thead>
-    <tr>
-      <th scope="col">Id</th>
-      <th scope="col">idJuego</th>
-      <th scope="col">Nombre Juego</th>
-      <th scope="col">Precio Juego</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr *ngFor="let juego of juegos">
-      <td>{{juego.id}}</td>
-      <td>{{juego.idJuego}}</td>
-      <td>{{juego.nombreJuego}}</td>
-    </tr>
-   
-  </tbody>
-</table>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let juego of juegos">
+        <td>{{juego.id}}</td>
+        <td>{{juego.nombreJuego}}</td>
+        <td>{{juego.precioJuego}}</td>
+        <td>
+          <span>
+          <i class="bi bi-pencil-square bg bg-warning" routerLink='/juegos/{{juego.id}}'></i>
+          <i (click)="confirmarEliminar(juego)" class="bi bi-trash bg bg-danger"></i>
+        </span>
+        </td>
+      </tr>
+    </tbody>
+  </table>
 </body>
+
 </html>
