@@ -14,11 +14,7 @@ import { MensajeService } from 'src/app/Servicios/mensaje.service';
 export class ListaJuegoComponent {
 
   constructor(private servicioJuegos: JuegosService,
-     private servicioFirebase: FirebaseService, 
-     
-     ) { 
-     
-     }
+     private servicioFirebase: FirebaseService) {}
 
   mensaje?: string;
   juegos: Juegos[] = [];

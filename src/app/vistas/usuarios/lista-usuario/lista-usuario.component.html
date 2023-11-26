@@ -1,9 +1,40 @@
-<ul class="list-group" *ngIf="usuarios">
+<!DOCTYPE html>
+<html lang="en">
 
-    <li class="list-group-item" *ngFor="let usu of usuarios">
-      {{usu.nombreUsuario}} 
-      {{usu.contrasenaUsuario}} 
-      {{usu.correoUsuario}}  <span ><i class="bi bi-pencil-square bg bg-warning" routerLink='usuarios/{{usu.id}}'></i></span>
-    </li>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
 
-</ul>
+<body>
+
+  <table class="table">
+    <thead>
+      <tr>
+        <th scope="col">Id Usuario</th>
+        <th scope="col">Nombre Usuario</th>
+        <th scope="col">Contraseña Usuario</th>
+        <th scope="col">Correo Usuario</th>
+        <th scope="col">Acciones</th>
+
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let usu of usuarios">
+        <td>{{usu.id}}</td>
+        <td>{{usu.nombreUsuario}}</td>
+        <td>{{usu.contrasenaUsuario}}</td>
+        <td>{{usu.correoUsuario}}</td>
+        <td>
+          <span>
+          <i class="bi bi-pencil-square bg bg-warning" routerLink='usuarios/{{usu.id}}'></i>
+          <i  class="bi bi-trash bg bg-danger"></i>
+        </span>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</body>
+
+</html>

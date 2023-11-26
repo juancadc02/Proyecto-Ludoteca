@@ -14,6 +14,7 @@
       <tr>
         <th scope="col">Id</th>
         <th scope="col">Nombre Juego</th>
+        <th scope="col">Codigo referencia</th>
         <th scope="col">Precio Juego</th>
         <th scope="col">Acciones</th>
 
@@ -23,6 +24,7 @@
       <tr *ngFor="let juego of juegos">
         <td>{{juego.id}}</td>
         <td>{{juego.nombreJuego}}</td>
+        <td>{{juego.codigoReferenciaJuego}}</td>
         <td>{{juego.precioJuego}}</td>
         <td>
           <span>
