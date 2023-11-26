@@ -2,6 +2,6 @@ export interface Usuario {
 
     id?:string,
     nombreUsuario:string,
-    contrasenaUsuario:string,
+    contra:string,
     correoUsuario:string
 }

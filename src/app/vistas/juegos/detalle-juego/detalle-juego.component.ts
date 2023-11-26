@@ -20,6 +20,7 @@ export class DetalleJuegoComponent {
   id: string = "";
   buttonText: string = "Agregar juego"; //Para cambiar el texto al boton.
   mensaje?: string;
+  textoTitulo:string='Añadir Juego';
 
   constructor(private servicioMensaje: MensajeService, private fb: FormBuilder, private servicioJuegos: JuegosService,
     private route: ActivatedRoute, private servicioFirebase: FirebaseService, private router: Router) {
@@ -30,10 +31,9 @@ export class DetalleJuegoComponent {
     });
 
   }
-
-
   ngOnInit() {
     if (this.route.snapshot.paramMap.get("id")) {
+      this.textoTitulo='Modificar Juego';
       this.id = this.route.snapshot.paramMap.get("id")!;
       this.buttonText = "Modificar juego";
       this.servicioFirebase.getFireBasePorId('juegos', this.id).subscribe(
@@ -45,7 +45,6 @@ export class DetalleJuegoComponent {
       }
     });
   }
-
   enviaDatos() {
     if (this.id) {
       this.modificarJuego();
@@ -54,12 +53,6 @@ export class DetalleJuegoComponent {
       this.agregarJuego();
     }
   }
-  modificarJuego() {
-    this.servicioJuegos.modificarJuego(this.juegos, 'juegos', this.id!).
-      then(() => console.log("Se guardo correctamente")).
-      catch(() => console.log("No se guardo"));
-  }
-
   agregarJuego() {
     if (this.juegoForm.valid) {
       const nuevoJuego = this.juegoForm.value;
@@ -79,6 +72,13 @@ export class DetalleJuegoComponent {
         });
     }
   }
+  modificarJuego() {
+    this.servicioJuegos.modificarJuego(this.juegos, 'juegos', this.id!).
+      then(() => console.log("Se guardo correctamente")).
+      catch(() => console.log("No se guardo"));
+  }
+
+ 
 
 }
 

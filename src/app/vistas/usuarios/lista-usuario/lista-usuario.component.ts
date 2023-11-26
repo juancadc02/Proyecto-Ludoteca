@@ -17,4 +17,13 @@ export class ListaUsuarioComponent {
   ngOnInit(){
     this.servicioUsuarios.listarUsuario().subscribe(res=> this.usuarios = res)
   }
+  confirmarEliminar(usuario: Usuario) {
+    const confirmacion = window.confirm(`¿Estás seguro de que deseas eliminar el usuario con correo ${usuario.correoUsuario}?`);
+    if (confirmacion) {
+      this.eliminarUsuario(usuario);
+    }
+  }
+  eliminarUsuario(usuario: Usuario) {
+    this.servicioUsuarios.eliminarJuego(usuario, "usuarios");
+  }
 }

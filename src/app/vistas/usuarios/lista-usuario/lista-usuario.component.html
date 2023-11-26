@@ -24,12 +24,13 @@
       <tr *ngFor="let usu of usuarios">
         <td>{{usu.id}}</td>
         <td>{{usu.nombreUsuario}}</td>
-        <td>{{usu.contrasenaUsuario}}</td>
+        <td>{{usu.contra}}</td>
         <td>{{usu.correoUsuario}}</td>
+        
         <td>
           <span>
           <i class="bi bi-pencil-square bg bg-warning" routerLink='usuarios/{{usu.id}}'></i>
-          <i  class="bi bi-trash bg bg-danger"></i>
+          <i class="bi bi-trash bg bg-danger" (click)="confirmarEliminar(usu)"></i>
         </span>
         </td>
       </tr>
