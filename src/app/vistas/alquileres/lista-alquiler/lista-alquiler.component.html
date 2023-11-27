@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+   
+  <table class="table">
+    <thead>
+      <tr>
+        <th scope="col">Id</th>
+        <th scope="col">Usuario</th>
+        <th scope="col">Juego</th>
+        <th scope="col">Fecha Alquiler</th>
+        <th scope="col">Fecha Devolucion</th>
+        <th scope="col">Precio alquiler</th>
+        <th scope="col">Acciones</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let alquiler of alquileres">
+        
+        <!--<td>{{juego.precioJuego}}</td>-->
+        <td>
+          <span>
+          <!--<i class="bi bi-pencil-square bg bg-warning" routerLink='/juegos/{{juego.id}}'></i>
+          <i (click)="confirmarEliminar(juego)" class="bi bi-trash bg bg-danger"></i>-->
+        </span>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</body>
+
+</html>

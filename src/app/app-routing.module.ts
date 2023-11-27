@@ -1,11 +1,10 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { UsuariosComponent } from './vistas/usuarios/usuarios.component';
 import { JuegosComponent } from './vistas/juegos/juegos.component';
 import { AlquileresComponent } from './vistas/alquileres/alquileres.component';
 import { PaginaInicioComponent } from './vistas/pagina-inicio/pagina-inicio.component';
 import { DetalleJuegoComponent } from './vistas/juegos/detalle-juego/detalle-juego.component';
-import { UsuariosModule } from './vistas/usuarios/usuarios.module';
+import { DetalleAlquilerComponent } from './vistas/alquileres/detalle-alquiler/detalle-alquiler.component';
 
 const routes: Routes = [
   {path:'',component:PaginaInicioComponent},
@@ -13,6 +12,7 @@ const routes: Routes = [
   {path:'juegos/nuevo',component:DetalleJuegoComponent},
   {path:'juegos/:id',component:DetalleJuegoComponent},
   {path:'alquiler',component:AlquileresComponent},
+  {path:'alquiler/nuevo',component:DetalleAlquilerComponent},
   {path:'usuarios', loadChildren : ()  => import('./vistas/usuarios/usuarios.module').then(m=>m.UsuariosModule)}
 
 ];

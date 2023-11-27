@@ -1,5 +1,8 @@
 <div class="container mt-4">
     <h2>{{textoTitulo}}</h2>
+    <div class="alert alert-success my-3" role="alert" *ngIf="mensaje">
+      {{mensaje}}
+    </div>
     <form [formGroup]="usuarioForm" (ngSubmit)="enviarDatos()">
         <div class="mb-3">
           <label for="nombreUsuario" class="form-label">Nombre Usuario</label>
@@ -16,7 +19,7 @@
           <input [(ngModel)]="usuarios.correoUsuario" type="text" class="form-control" id="correoUsuario" formControlName="correoUsuario" required>
         </div>
       
-        <button type="submit" class="btn btn-primary">Agregar Usuario</button>
+        <button type="submit" class="btn btn-primary">{{botonEnviarDatos}}</button>
       </form>
   </div>
   

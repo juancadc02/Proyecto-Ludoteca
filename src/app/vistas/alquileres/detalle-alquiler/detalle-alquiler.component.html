@@ -1,0 +1,28 @@
+<div class="container mt-4">
+    <h2>{{textoTitulo}}</h2>
+  
+    <div class="alert alert-success my-3" role="alert" *ngIf="mensaje">
+      {{mensaje}}
+    </div>
+  
+    <form [formGroup]="alquilerForm" (ngSubmit)="enviarDatos()">
+      <div class="mb-3">
+        <label for="juegoId" class="form-label">Juego:</label>
+        <input [(ngModel)]="alquiler.juegoId" type="text" class="form-control" id="juegoId"
+          formControlName="juegoId" required>
+      </div>
+  
+      <label for="documentId">Selecciona un ID:</label>
+    <select id="documentId" [(ngModel)]="usuarios" name="documentId">
+      <option *ngFor="let id of usuarios" [value]="id">{{ id }}</option>
+    </select>
+  
+      <div class="mb-3">
+        <label for="costoAlquiler" class="form-label">Precio</label>
+        <input [(ngModel)]="alquiler.costoAlquiler" type="number" class="form-control" id="costoAlquiler"
+          formControlName="costoAlquiler" required>
+      </div>
+  
+      <button type="submit" class="btn btn-primary">{{buttonText}}</button>
+    </form>
+  </div>

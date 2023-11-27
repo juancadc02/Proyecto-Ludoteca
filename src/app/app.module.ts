@@ -18,6 +18,9 @@ import { PaginaInicioComponent } from './vistas/pagina-inicio/pagina-inicio.comp
 import { DetalleUsuarioComponent } from './vistas/usuarios/detalle-usuario/detalle-usuario.component';
 import { ListaUsuarioComponent } from './vistas/usuarios/lista-usuario/lista-usuario.component';
 import { ContenedorUsuariosComponent } from './vistas/usuarios/contenedor-usuarios/contenedor-usuarios.component';
+import { DetalleAlquilerComponent } from './vistas/alquileres/detalle-alquiler/detalle-alquiler.component';
+import { ListaAlquilerComponent } from './vistas/alquileres/lista-alquiler/lista-alquiler.component';
+import { ContenerdorAlquilerComponent } from './vistas/alquileres/contenerdor-alquiler/contenerdor-alquiler.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -31,7 +34,10 @@ import { ContenedorUsuariosComponent } from './vistas/usuarios/contenedor-usuari
     PaginaInicioComponent,
     DetalleUsuarioComponent,
     ListaUsuarioComponent,
-    ContenedorUsuariosComponent
+    ContenedorUsuariosComponent,
+    DetalleAlquilerComponent,
+    ListaAlquilerComponent,
+    ContenerdorAlquilerComponent
   ],
   imports: [
     BrowserModule,
