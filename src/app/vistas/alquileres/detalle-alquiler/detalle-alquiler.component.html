@@ -1,50 +1,64 @@
 <div class="container mt-4">
-    <h2>{{textoTitulo}}</h2>
-  
-    <div class="alert alert-success my-3" role="alert" *ngIf="mensaje">
-      {{mensaje}}
+  <h2>{{textoTitulo}}</h2>
+
+  <div class="alert alert-success my-3" role="alert" *ngIf="mensaje">
+    {{mensaje}}
+  </div>
+
+  <form [formGroup]="alquilerForm" (ngSubmit)="enviaDatos()">
+
+    <!--Pedimos el juego-->
+    <div class="mb-3">
+      <label for="nombreJuego" class="form-label">Juego:</label>
+      <select class="form-select" name="nombreJuego" formControlName="nombreJuego" [(ngModel)]="alquiler.nombreJuego">
+        <option selected>Selecciona un juego.</option>
+        <option *ngFor="let juego of juegos" [value]="juego.nombreJuego">{{juego.nombreJuego}}</option>
+      </select>
     </div>
-   
-    <form [formGroup]="alquilerForm" (ngSubmit)="enviaDatos()">
 
-      <!--Pedimos el juego-->
-      <div class="mb-3">
-        <label for="nombreJuego" class="form-label">Juego:</label>
-        <select class="form-select" name="nombreJuego" formControlName="nombreJuego" [(ngModel)]="alquiler.nombreJuego">
-          <option selected>Selecciona un juego.</option>
-          <option *ngFor="let juego of juegos" [value]="juego.nombreJuego">{{juego.nombreJuego}}</option>
-        </select>
-      </div>
+    <!--Pedimos el usuario-->
+    <div class="mb-3">
+      <label for="nombreUsuario" class="form-label">Usuario:</label>
+      <select class="form-select" name="nombreUsuario" formControlName="nombreUsuario"
+        [(ngModel)]="alquiler.nombreUsuario">
+        <option selected>Selecciona un juego.</option>
+        <option *ngFor="let usuario of usuarios" [value]="usuario.nombreUsuario">{{usuario.nombreUsuario}}</option>
+      </select>
+    </div>
 
-       <!--Pedimos el usuario-->
-       <div class="mb-3">
-        <label for="nombreUsuario" class="form-label">Usuario:</label>
-        <select class="form-select" name="nombreUsuario" formControlName="nombreUsuario" [(ngModel)]="alquiler.nombreUsuario">
-          <option selected>Selecciona un juego.</option>
-          <option *ngFor="let usuario of usuarios" [value]="usuario.nombreUsuario">{{usuario.nombreUsuario}}</option>
-        </select>
-      </div>
-      
-      <!--Pedimos la fecha de entrega-->
-      <div class="mb-3">
-        <label for="fechaDevolucionPrevista" class="form-label">Fecha devolucion</label>
-        <input [(ngModel)]="alquiler.fechaDevolucionPrevista" type="date" class="form-control" id="fechaDevolucionPrevista"
-        formControlName="fechaDevolucionPrevista"  required>
-      </div>
+    <!--Pedimos la fecha de entrega-->
+    <div class="mb-3">
+      <label for="fechaDevolucionPrevista" class="form-label">Fecha devolucion</label>
+      <input [(ngModel)]="alquiler.fechaDevolucionPrevista" type="date" class="form-control"
+        id="fechaDevolucionPrevista" formControlName="fechaDevolucionPrevista" required>
+    </div>
 
-      <!--Mostramos el precio-->
-      <div class="mb-3">
-        <label for="costoAlquiler" class="form-label">Precio</label>
-        <input [(ngModel)]="alquiler.costoAlquiler" type="number" class="form-control" id="costoAlquiler"
-          formControlName="costoAlquiler" >
-      </div>
+    <!--Mostramos el precio
+    <div class="mb-3">
+      <label for="costoAlquiler" class="form-label">Precio</label>
+      <input [value]="diferenciaDiasPrecio" type="number" class="form-control" id="costoAlquiler"
+        formControlName="costoAlquiler" readonly>
+    </div>-->
 
- <!-- Mostramos la diferencia de días -->
+
+    <!-- Mostramos la diferencia de días -->
+    <div class="mb-3">
+      <label name="diferenciaDias" for="diferenciaDias" class="form-label">Diferencia de días:{{
+        calcularDiferenciaDeDias() }}</label>
+    </div>
+  <!--Mostramos el precio-->
 <div class="mb-3">
-  <label name ="diferenciaDias" for="diferenciaDias" class="form-label">Diferencia de días:{{ calcularDiferenciaDeDias() }}</label>
+  <label for="costoAlquiler" class="form-label">Precio</label>
+  <input [(ngModel)]="diferenciaDiasPrecio" type="number" class="form-control" id="costoAlquiler" formControlName="costoAlquiler" readonly>
 </div>
 
-      
-      <button type="submit" class="btn btn-primary">{{buttonText}}</button>
-    </form>
-  </div>
+
+<div class="mb-3 form-check">
+  <input type="checkbox" class="form-check-input" id="alquilerDevuelto" formControlName="alquilerDevuelto"
+    [(ngModel)]="alquiler.alquilerDevuelto">
+  <label class="form-check-label" for="alquilerDevuelto">Alquiler Devuelto</label>
+</div>
+
+    <button type="submit" class="btn btn-primary">{{buttonText}}</button>
+  </form>
+</div>

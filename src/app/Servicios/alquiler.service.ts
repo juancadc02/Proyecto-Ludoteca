@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 
 import { Alquiler } from '../Modelos/alquiler';
 import { Firestore, collection, collectionData, getDoc } from '@angular/fire/firestore';
-import { addDoc, doc, setDoc } from 'firebase/firestore';
+import { addDoc, deleteDoc, doc, setDoc } from 'firebase/firestore';
 import { Observable } from 'rxjs';
 
 @Injectable({
@@ -24,6 +24,10 @@ export class AlquilerService {
   modificarAlquiler(objeto: any, nombreColeccion: string, id: string) {
     const collectionRef = doc(this.db, nombreColeccion+"/"+id);
     return setDoc(collectionRef, objeto);
+  }
+  eliminarAlquiler(objeto: any, nombreColeccion: string){
+    const collectionRef = doc(this.db, nombreColeccion+"/"+objeto.id);
+    return deleteDoc(collectionRef);
   }
 }
 

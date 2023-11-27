@@ -18,6 +18,7 @@
         <th scope="col">Fecha Alquiler</th>
         <th scope="col">Fecha Devolucion</th>
         <th scope="col">Precio alquiler</th>
+        <th scope="col">Alquiler devuelto</th>
         <th scope="col">Acciones</th>
       </tr>
     </thead>
@@ -30,12 +31,15 @@
         <td>{{alquiler.fechaAlquiler}}</td>
         <td>{{alquiler.fechaDevolucionPrevista}}</td>
         <td>{{alquiler.costoAlquiler}}</td>
+        <td>{{alquiler.alquilerDevuelto}}</td>
+
+
 
 
         <td>
           <span>
-          <!--<i class="bi bi-pencil-square bg bg-warning" routerLink='/juegos/{{juego.id}}'></i>
-          <i (click)="confirmarEliminar(juego)" class="bi bi-trash bg bg-danger"></i>-->
+          <i class="bi bi-pencil-square bg bg-warning" routerLink='/alquiler/{{alquiler.id}}'></i>
+          <i (click)="confirmarEliminar(alquiler)" class="bi bi-trash bg bg-danger"></i>
         </span>
         </td>
       </tr>

@@ -13,6 +13,7 @@ const routes: Routes = [
   {path:'juegos/:id',component:DetalleJuegoComponent},
   {path:'alquiler',component:AlquileresComponent},
   {path:'alquiler/nuevo',component:DetalleAlquilerComponent},
+  {path:'alquiler/:id',component:DetalleAlquilerComponent},
   {path:'usuarios', loadChildren : ()  => import('./vistas/usuarios/usuarios.module').then(m=>m.UsuariosModule)}
 
 ];

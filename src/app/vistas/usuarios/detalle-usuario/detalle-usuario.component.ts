@@ -75,6 +75,12 @@ modificarUsuario(){
   this.servicioUsuario.modificarJuego(this.usuarios, 'usuarios', this.id!).
       then(() => console.log("Se guardo correctamente")).
       catch(() => console.log("No se guardo"));
+      this.servicioMensaje.enviarMensaje('Usuario modificado correctamente. Redirigiendo a listado de alquileres ...');
+      //Redirigimos al listado de juegos 2 segundos despues de añadirlo.
+      setTimeout(() => {
+       // Redirigir a otro sitio
+       this.router.navigate(['/usuarios']);
+     }, 2000)
   
   }
   

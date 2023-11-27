@@ -18,7 +18,7 @@ import { UsuariosService } from 'src/app/Servicios/usuarios.service';
 export class DetalleAlquilerComponent {
 
   alquilerForm: FormGroup;
-  alquiler: Alquiler = { nombreUsuario: "", nombreJuego: "", fechaAlquiler: new Date(), fechaDevolucionPrevista: new Date(), costoAlquiler: 0, totalDiasAlquiler: 0 };
+  alquiler: Alquiler = { nombreUsuario: "", nombreJuego: "", fechaAlquiler: new Date(), fechaDevolucionPrevista: new Date(), costoAlquiler: 0, totalDiasAlquiler: 0 ,alquilerDevuelto:false};
   id: string = "";
   nombreUsuario?: string;
   nombreJuego?: string;
@@ -27,7 +27,9 @@ export class DetalleAlquilerComponent {
   textoTitulo: string = 'Añadir Alquiler';
   usuarios: Usuario[] = [];
   juegos: Juegos[] = [];
-  diferenciaEnDias: number = 0;
+  diferenciaEnDias?: number;
+  diferenciaDiasPrecio?: number ;
+
 
  
 
@@ -46,7 +48,8 @@ export class DetalleAlquilerComponent {
       nombreUsuario: ['', Validators.required],
       fechaAlquiler: [new Date().toISOString().split('T')[0], Validators.required],
       fechaDevolucionPrevista: [null, Validators.required],
-      costoAlquiler: [null, Validators.required]
+      costoAlquiler: [null, Validators.required],
+      alquilerDevuelto: [null, Validators.required]
     });
 
     // Verificar si alquilerForm no es nulo antes de suscribirse a los cambios
@@ -64,6 +67,7 @@ export class DetalleAlquilerComponent {
   }
 
   ngOnInit() {
+    
     // Cargamos los juegos disponibles y los usuarios.
     this.servicioUsuario.listarUsuario().subscribe(res => this.usuarios = res);
     this.servicioJuego.listarJuego().subscribe(res => this.juegos = res);
@@ -103,24 +107,34 @@ export class DetalleAlquilerComponent {
         .then(() => {
           console.log('Alquiler agregado correctamente');
           this.alquilerForm.reset();
-          this.servicioMensaje.enviarMensaje('Alquiler añadido correctamente. Redirigiendo a listado de juegos ...');
-          // Redirigimos al listado de juegos 2 segundos después de añadirlo.
-          setTimeout(() => {
-            // Redirigir a otro sitio
-            this.router.navigate(['/alquiler']);
-          }, 2000);
-        })
-        .catch(error => {
-          console.error('Error al agregar el juego:', error);
-        });
+          this.servicioMensaje.enviarMensaje('Alquiler añadido correctamente. Redirigiendo a listado de alquileres ...');
+            //Redirigimos al listado de juegos 2 segundos despues de añadirlo.
+            setTimeout(() => {
+              // Redirigir a otro sitio
+              this.router.navigate(['/alquiler']);
+            }, 2000)
+          })
+          .catch(error => {
+            console.error('Error al agregar el alquiler:', error);
+          });
+      }
     }
-  }
 
   modificarAlquiler() {
-    this.servicioAlquiler.modificarAlquiler(this.alquiler, 'alquileres', this.id!).
-      then(() => console.log("Se guardó correctamente")).
-      catch(() => console.log("No se guardó"));
-  }
+    // Actualizar el objeto alquiler con el nuevo precio calculado
+    this.alquiler.costoAlquiler = this.diferenciaDiasPrecio || 0;
+
+    this.servicioAlquiler.modificarAlquiler(this.alquiler, 'alquileres', this.id!)
+        .then(() => console.log("Se guardó correctamente"))
+        .catch(() => console.log("No se guardó"));
+
+    this.servicioMensaje.enviarMensaje('Alquiler modificado correctamente. Redirigiendo a listado de alquileres ...');
+     //Redirigimos al listado de juegos 2 segundos despues de añadirlo.
+     setTimeout(() => {
+      // Redirigir a otro sitio
+      this.router.navigate(['/alquiler']);
+    }, 2000)
+}
 
   calcularDiferenciaDeDias(): number {
     if (this.alquilerForm) {
@@ -133,9 +147,14 @@ export class DetalleAlquilerComponent {
       // Convierte la diferencia a días
       this.diferenciaEnDias = Math.ceil(diferenciaEnMilisegundos / (1000 * 60 * 60 * 24));
   
+      // Multiplica la diferencia por el precio del juego seleccionado
+      const precioJuego = this.juegos.find(juego => juego.nombreJuego === this.alquilerForm.value.nombreJuego)?.precioJuego || 0;
+      this.diferenciaDiasPrecio = this.diferenciaEnDias * precioJuego;
+  
       return this.diferenciaEnDias;
     }
   
     return 0;
   }
+  
 }

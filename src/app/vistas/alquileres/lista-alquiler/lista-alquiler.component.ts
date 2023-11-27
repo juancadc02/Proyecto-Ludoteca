@@ -15,4 +15,13 @@ export class ListaAlquilerComponent {
   ngOnInit() {
     this.servicioAlquiler.listarAlquiler().subscribe(res => this.alquileres = res);
   }
+  confirmarEliminar(alquiler: Alquiler) {
+    const confirmacion = window.confirm(`¿Estás seguro de que deseas eliminar el usuario con correo ${alquiler.id}?`);
+    if (confirmacion) {
+      this.eliminarUsuario(alquiler);
+    }
+  }
+  eliminarUsuario(alquiler: Alquiler) {
+    this.servicioAlquiler.eliminarAlquiler(alquiler, "alquileres");
+  }
 }

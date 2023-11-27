@@ -76,6 +76,12 @@ export class DetalleJuegoComponent {
     this.servicioJuegos.modificarJuego(this.juegos, 'juegos', this.id!).
       then(() => console.log("Se guardo correctamente")).
       catch(() => console.log("No se guardo"));
+      this.servicioMensaje.enviarMensaje('Juego modificado correctamente. Redirigiendo a listado de alquileres ...');
+      //Redirigimos al listado de juegos 2 segundos despues de añadirlo.
+      setTimeout(() => {
+       // Redirigir a otro sitio
+       this.router.navigate(['/juegos']);
+     }, 2000)
   }
 
  
