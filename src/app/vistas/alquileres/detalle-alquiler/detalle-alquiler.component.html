@@ -4,23 +4,39 @@
     <div class="alert alert-success my-3" role="alert" *ngIf="mensaje">
       {{mensaje}}
     </div>
-  
-    <form [formGroup]="alquilerForm" (ngSubmit)="enviarDatos()">
+   
+    <form [formGroup]="alquilerForm" (ngSubmit)="enviaDatos()">
+
+      <!--Pedimos el juego-->
       <div class="mb-3">
-        <label for="juegoId" class="form-label">Juego:</label>
-        <input [(ngModel)]="alquiler.juegoId" type="text" class="form-control" id="juegoId"
-          formControlName="juegoId" required>
+        <label for="nombreJuego" class="form-label">Juego:</label>
+        <select class="form-select" name="nombreJuego" formControlName="nombreJuego" [(ngModel)]="alquiler.nombreJuego">
+          <option selected>Selecciona un juego.</option>
+          <option *ngFor="let juego of juegos" [value]="juego.nombreJuego">{{juego.nombreJuego}}</option>
+        </select>
       </div>
-  
-      <label for="documentId">Selecciona un ID:</label>
-    <select id="documentId" [(ngModel)]="usuarios" name="documentId">
-      <option *ngFor="let id of usuarios" [value]="id">{{ id }}</option>
-    </select>
-  
+
+       <!--Pedimos el usuario-->
+       <div class="mb-3">
+        <label for="nombreUsuario" class="form-label">Usuario:</label>
+        <select class="form-select" name="nombreUsuario" formControlName="nombreUsuario" [(ngModel)]="alquiler.nombreUsuario">
+          <option selected>Selecciona un juego.</option>
+          <option *ngFor="let usuario of usuarios" [value]="usuario.nombreUsuario">{{usuario.nombreUsuario}}</option>
+        </select>
+      </div>
+      
+      <!--Pedimos la fecha de entrega-->
+      <div class="mb-3">
+        <label for="fechaDevolucionPrevista" class="form-label">Fecha devolucion</label>
+        <input [(ngModel)]="alquiler.fechaDevolucionPrevista" type="date" class="form-control" id="fechaDevolucionPrevista"
+        formControlName="fechaDevolucionPrevista"  required>
+      </div>
+
+      <!--Mostramos el precio-->
       <div class="mb-3">
         <label for="costoAlquiler" class="form-label">Precio</label>
         <input [(ngModel)]="alquiler.costoAlquiler" type="number" class="form-control" id="costoAlquiler"
-          formControlName="costoAlquiler" required>
+          formControlName="costoAlquiler" >
       </div>
   
       <button type="submit" class="btn btn-primary">{{buttonText}}</button>

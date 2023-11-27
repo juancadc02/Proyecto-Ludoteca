@@ -14,7 +14,6 @@ export class MensajeService {
   enviarMensaje(mensaje: string) {
     this.mensajeSubject.next(mensaje);
   }
-
   obtenerMensaje(){
     return this.mensajeSubject.asObservable();
   }

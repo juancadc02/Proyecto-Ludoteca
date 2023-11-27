@@ -2,9 +2,11 @@ import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Alquiler } from 'src/app/Modelos/alquiler';
+import { Juegos } from 'src/app/Modelos/juegos';
 import { Usuario } from 'src/app/Modelos/usuarios';
 import { AlquilerService } from 'src/app/Servicios/alquiler.service';
 import { FirebaseService } from 'src/app/Servicios/firebase.service';
+import { JuegosService } from 'src/app/Servicios/juegos.service';
 import { MensajeService } from 'src/app/Servicios/mensaje.service';
 import { UsuariosService } from 'src/app/Servicios/usuarios.service';
 
@@ -16,13 +18,19 @@ import { UsuariosService } from 'src/app/Servicios/usuarios.service';
 export class DetalleAlquilerComponent {
 
   alquilerForm: FormGroup;
-  alquiler: Alquiler = { usuarioId: "", juegoId: "", fechaAlquiler: new Date(), fechaDevolucionPrevista: new Date(), costoAlquiler: 0 };
+  alquiler: Alquiler = { nombreUsuario: "", nombreJuego: "", fechaAlquiler: new Date(), fechaDevolucionPrevista: new Date(), costoAlquiler: 0 };
   id: string = "";
+  nombreUsuario?:string;
+  nombreJuego?:string;
   buttonText: string = "Agregar alquiler";
   mensaje?: string;
   textoTitulo: string = 'Añadir Alquiler';
   usuarios: Usuario[] = [];
-  
+  juegos:Juegos[]=[];
+
+  precioAlquilerTotal?:number;
+  precioJuegoElegido?:number;
+  diasAlquilerTotal?:number;
   constructor(
     private servicioMensaje: MensajeService,
     private fb: FormBuilder,
@@ -30,27 +38,27 @@ export class DetalleAlquilerComponent {
     private servicioUsuario:UsuariosService,
     private route: ActivatedRoute,
     private router: Router,
-    private firebase:FirebaseService
+    private firebase:FirebaseService,
+    private servicioJuego: JuegosService,
+    
   ) {
     this.alquilerForm = this.fb.group({
-      usuarioId: ['', Validators.required],
-      juegoId: ['', Validators.required],
-      // La fecha de alquiler se establece automáticamente en la fecha actual
-      fechaAlquiler: [new Date(), Validators.required],
-      // La fecha de devolución prevista se establece automáticamente en 7 días después de la fecha actual
-      fechaDevolucionPrevista: [this.getFechaDevolucionPrevista(), Validators.required],
-      costoAlquiler: ['', Validators.required],
+      nombreJuego: ['', Validators.required],
+      nombreUsuario: ['', Validators.required],
+      fechaAlquiler:[new Date().toISOString().split('T')[0], Validators.required],
+      fechaDevolucionPrevista: [null, Validators.required],
+      costoAlquiler: [null, Validators.required]
     });
   }
 
-  // Función auxiliar para obtener la fecha de devolución prevista (7 días después de la fecha actual)
-  private getFechaDevolucionPrevista(): Date {
-    const fechaActual = new Date();
-    fechaActual.setDate(fechaActual.getDate() + 7);
-    return fechaActual;
-  }
+ 
 
   ngOnInit() {
+    
+    //Cargamos los juegos disponibles y los usuarios.
+    this.servicioUsuario.listarUsuario().subscribe(res => this.usuarios = res);
+    this.servicioJuego.listarJuego().subscribe(res=> this.juegos=res);
+    //Comprobamos si estamos añadiendo o modificando.
     if (this.route.snapshot.paramMap.get("id")) {
       this.textoTitulo = 'Modificar Alquiler';
       this.id = this.route.snapshot.paramMap.get("id")!;
@@ -58,11 +66,9 @@ export class DetalleAlquilerComponent {
       this.firebase.getFireBasePorId('alquileres',this.id).subscribe(
         (res: Alquiler) => this.alquiler = res
       );
-      this.servicioUsuario.getFireBase('usuarios')
-      .subscribe(res => this.usuarios = res);
-     
+      
     }
-
+    //Para mostrar el mensaje una vez añadido el alquiler
     this.servicioMensaje.mensaje$.subscribe((mensaje) => {
       if (mensaje) {
         this.mensaje = mensaje;
@@ -70,14 +76,14 @@ export class DetalleAlquilerComponent {
     });
   }
 
-  enviarDatos() {
+  enviaDatos() {
     if (this.id) {
       this.modificarAlquiler();
-    } else {
+    }
+    else {
       this.agregarAlquiler();
     }
   }
-
   agregarAlquiler() {
     if (this.alquilerForm.valid) {
       const nuevoAlquiler = this.alquilerForm.value;
@@ -85,21 +91,28 @@ export class DetalleAlquilerComponent {
         .then(() => {
           console.log('Alquiler agregado correctamente');
           this.alquilerForm.reset();
-          this.servicioMensaje.enviarMensaje('Alquiler añadido correctamente. Redirigiendo a listado de alquileres...');
+          this.servicioMensaje.enviarMensaje('Alquiler añadido correctamente.Redirigiendo a listado de juegos ...');
+          //Redirigimos al listado de juegos 2 segundos despues de añadirlo.
           setTimeout(() => {
-            this.router.navigate(['/alquileres']);
-          }, 2000);
+            // Redirigir a otro sitio
+            this.router.navigate(['/alquiler']);
+          }, 2000)
         })
         .catch(error => {
-          console.error('Error al agregar el alquiler:', error);
+          console.error('Error al agregar el juego:', error);
         });
     }
   }
-  modificarAlquiler(){
-
+  modificarAlquiler() {
+    this.servicioAlquiler.modificarAlquiler(this.alquiler, 'alquileres', this.id!).
+      then(() => console.log("Se guardo correctamente")).
+      catch(() => console.log("No se guardo"));
   }
+
+ }
   
   
   
-}
+  
+
 

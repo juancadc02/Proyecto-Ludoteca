@@ -11,15 +11,14 @@ export class UsuariosService {
 
   constructor(private db: Firestore) { }
 
-  
-
-  agregarUsuario(usuario:Usuario){
-    const usuarioReferencia = collection(this.db,`usuarios`);
-    return addDoc(usuarioReferencia,usuario);
-  }
+  //CRUD USUARIO
   listarUsuario() : Observable <Usuario[]>{
     const juegosRef =collection(this.db,'usuarios')
     return collectionData(juegosRef,{idField:'id'}) as Observable<Usuario[]>
+  }
+  agregarUsuario(usuario:Usuario){
+    const usuarioReferencia = collection(this.db,`usuarios`);
+    return addDoc(usuarioReferencia,usuario);
   }
   modificarJuego(objeto: any, nombreColeccion: string, id: string) {
     const collectionRef = doc(this.db, nombreColeccion+"/"+id);
@@ -29,10 +28,7 @@ export class UsuariosService {
     const collectionRef = doc(this.db, nombreColeccion+"/"+objeto.id);
     return deleteDoc(collectionRef);
   }
-  getFireBase(nombreColeccion: string){
-    const collecionRef = collection(this.db, nombreColeccion);
-    return collectionData(collecionRef, {idField: "id"}) as Observable<any[]>;
-  }
+  
  
   
  

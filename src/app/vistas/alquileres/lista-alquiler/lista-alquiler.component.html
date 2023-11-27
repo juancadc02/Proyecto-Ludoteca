@@ -24,7 +24,14 @@
     <tbody>
       <tr *ngFor="let alquiler of alquileres">
         
-        <!--<td>{{juego.precioJuego}}</td>-->
+        <td>{{alquiler.id}}</td>
+        <td>{{alquiler.nombreUsuario}}</td>
+        <td>{{alquiler.nombreJuego}}</td>
+        <td>{{alquiler.fechaAlquiler}}</td>
+        <td>{{alquiler.fechaDevolucionPrevista}}</td>
+        <td>{{alquiler.costoAlquiler}}</td>
+
+
         <td>
           <span>
           <!--<i class="bi bi-pencil-square bg bg-warning" routerLink='/juegos/{{juego.id}}'></i>
