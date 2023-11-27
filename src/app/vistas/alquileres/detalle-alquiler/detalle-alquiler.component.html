@@ -38,7 +38,13 @@
         <input [(ngModel)]="alquiler.costoAlquiler" type="number" class="form-control" id="costoAlquiler"
           formControlName="costoAlquiler" >
       </div>
-  
+
+ <!-- Mostramos la diferencia de días -->
+<div class="mb-3">
+  <label name ="diferenciaDias" for="diferenciaDias" class="form-label">Diferencia de días:{{ calcularDiferenciaDeDias() }}</label>
+</div>
+
+      
       <button type="submit" class="btn btn-primary">{{buttonText}}</button>
     </form>
   </div>

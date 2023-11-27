@@ -5,4 +5,6 @@ export interface Alquiler {
     fechaAlquiler?: Date;
     fechaDevolucionPrevista: Date;
     costoAlquiler: number;
+    totalDiasAlquiler:number;
+    
   }
